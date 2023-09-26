@@ -1,7 +1,11 @@
-function TodoCounter() {
+import './css/TodoCounter.css'
+
+function TodoCounter ({ total, completed }) {
   return (
-    <h2>Haz completado 3 de 5 TODOS</h2>
+    <h1>
+      Haz completado {completed} de {total} TODOS
+    </h1>
   )
 }
 
-export {TodoCounter}
+export { TodoCounter }

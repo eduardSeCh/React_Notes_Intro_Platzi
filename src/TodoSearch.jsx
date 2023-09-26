@@ -1,9 +1,9 @@
 import React from 'react'
-
-function TodoSearch() {
+import './css/TodoSearch.css'
+function TodoSearch () {
   return (
-    <input placeholder='Cortar a cebolliun'/>
+    <input placeholder='Cortar a cebolliun' />
   )
 }
 
-export {TodoSearch}
+export { TodoSearch }
