@@ -1,7 +1,9 @@
 input {
     text-align: center;
     margin: auto;
-    margin-top: 1rem;
+    margin-top: 2rem;
+    min-height: 3rem;
+    width: 40rem;
     font-size: 2rem;
     align-items: center;
     display: flex;
@@ -9,4 +11,14 @@ input {
     border: solid 1px aqua;
     border-radius: 10px;
 
+}
+
+input::placeholder {
+    color: #a5a5a5;
+    font-family: 'Montserrat';
+    font-weight: 400;
+}
+
+input:focus {
+    outline-color: #61dafa;
 }

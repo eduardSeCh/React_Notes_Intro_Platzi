@@ -1,7 +1,14 @@
-h1 {
+.TodoCounter {
     font-size: 24px;
     text-align: center;
-    margin: 0;
-    padding: 48px;
-    background-color: rgb(167, 100, 229);
+    margin: 24px 0;
+    padding: 28px;
+    font-weight: normal;
+    background-color: rgb(167, 100, 229, .5);
+    border-radius: 15px;
+    box-shadow: 2px 2px 20px 8px rgba(167, 100, 229,.5);
+}
+
+.TodoCounter span {
+    font-weight: bold;
 }
