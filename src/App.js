@@ -6,14 +6,28 @@ import './App.css'
 import { TodoItem } from './TodoItem'
 import { CreateTodoButton } from './CreateTodoButton'
 
-const defaultTodos = [
+/* const defaultTodos = [
   { text: 'preuba 101011', completed: false },
   { text: 'preuba 2', completed: true },
   { text: 'preuba 3', completed: false }
-]
+] */
 
+/* localStorage.setItem('TODOS_V1', JSON.stringify(defaultTodos)) */
+/* localStorage.removeItem('TODOS_V1') */
 function App () {
-  const [todos, setTodos] = useState(defaultTodos)
+  const localStorageTodos = window.localStorage.getItem('TODOS_V1')
+  let parsedTodos
+
+  if (!localStorageTodos) {
+    window.localStorage.setItem('TODOS_V1', JSON.stringify([]))
+    parsedTodos = []
+  } else {
+    parsedTodos = JSON.parse(localStorageTodos)
+  }
+
+  parsedTodos = JSON.parse(localStorageTodos)
+
+  const [todos, setTodos] = useState(parsedTodos)
   const [searchValue, setSearchValue] = useState('')
 
   const completedTodos = todos.filter(todo => !!todo.completed).length
@@ -26,6 +40,11 @@ function App () {
     }
   )
 
+  const saveTodos = (newTodos) => {
+    setTodos(newTodos)
+    window.localStorage.setItem('TODOS_V1', JSON.stringify(newTodos))
+  }
+
   const completeTodo = (text) => {
     const newTodos = [...todos]
     newTodos
@@ -33,14 +52,14 @@ function App () {
       .forEach(todo => {
         todo.completed = true
       })
-    setTodos(newTodos)
+    saveTodos(newTodos)
   }
 
   const deleteTodo = (text) => {
     const newTodos = [...todos]
     const index = newTodos.findIndex(todo => todo.text === text)
     newTodos.splice(index, 1)
-    setTodos(newTodos)
+    saveTodos(newTodos)
   }
 
   return (
