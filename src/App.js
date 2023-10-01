@@ -14,20 +14,30 @@ import { CreateTodoButton } from './CreateTodoButton'
 
 /* localStorage.setItem('TODOS_V1', JSON.stringify(defaultTodos)) */
 /* localStorage.removeItem('TODOS_V1') */
-function App () {
-  const localStorageTodos = window.localStorage.getItem('TODOS_V1')
-  let parsedTodos
 
-  if (!localStorageTodos) {
-    window.localStorage.setItem('TODOS_V1', JSON.stringify([]))
-    parsedTodos = []
+function useLocalStorage (itemName, initialValue) {
+  const localStorageItem = window.localStorage.getItem(itemName)
+  let parsedItems
+
+  if (!localStorageItem) {
+    window.localStorage.setItem(itemName, JSON.stringify(initialValue))
+    parsedItems = initialValue
   } else {
-    parsedTodos = JSON.parse(localStorageTodos)
+    parsedItems = JSON.parse(localStorageItem)
   }
 
-  parsedTodos = JSON.parse(localStorageTodos)
+  const [items, setItems] = useState(parsedItems)
 
-  const [todos, setTodos] = useState(parsedTodos)
+  const saveItem = (newItems) => {
+    setItems(newItems)
+    window.localStorage.setItem(itemName, JSON.stringify(newItems))
+  }
+
+  return [items, saveItem]
+}
+
+function App () {
+  const [todos, saveTodos] = useLocalStorage('TODOS_V1', [])
   const [searchValue, setSearchValue] = useState('')
 
   const completedTodos = todos.filter(todo => !!todo.completed).length
@@ -39,11 +49,6 @@ function App () {
       return todoText.includes(searchText)
     }
   )
-
-  const saveTodos = (newTodos) => {
-    setTodos(newTodos)
-    window.localStorage.setItem('TODOS_V1', JSON.stringify(newTodos))
-  }
 
   const completeTodo = (text) => {
     const newTodos = [...todos]
