@@ -6,13 +6,16 @@ import { AppUI } from './AppUI'
   { text: 'preuba 101011', completed: false },
   { text: 'preuba 2', completed: true },
   { text: 'preuba 3', completed: false }
-] */
+]
 
-/* localStorage.setItem('TODOS_V1', JSON.stringify(defaultTodos)) */
+localStorage.setItem('TODOS_V1', JSON.stringify(defaultTodos)) */
 /* localStorage.removeItem('TODOS_V1') */
 
 function App () {
-  const [todos, saveTodos] = useLocalStorage('TODOS_V1', [])
+  const {
+    items: todos, saveItem: saveTodos, loading, error
+  } = useLocalStorage('TODOS_V1', [])
+
   const [searchValue, setSearchValue] = useState('')
 
   const completedTodos = todos.filter(todo => !!todo.completed).length
@@ -44,6 +47,8 @@ function App () {
 
   return (
     <AppUI
+      loading={loading}
+      error={error}
       completeTodo={completeTodo}
       completedTodos={completedTodos}
       deleteTodo={deleteTodo}
