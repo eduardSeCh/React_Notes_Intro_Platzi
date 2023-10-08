@@ -1,5 +1,14 @@
 import { useState, useEffect } from 'react'
 
+/* const defaultTodos = [
+  { text: 'preuba 101011', completed: false },
+  { text: 'preuba 2', completed: true },
+  { text: 'preuba 3', completed: false }
+]
+
+localStorage.setItem('TODOS_V1', JSON.stringify(defaultTodos)) */
+/* localStorage.removeItem('TODOS_V1') */
+
 function useLocalStorage (itemName, initialValue) {
   const [items, setItems] = useState(initialValue)
   const [loading, setLoading] = useState(true)
@@ -26,7 +35,7 @@ function useLocalStorage (itemName, initialValue) {
         setError(true)
         console.log('Error: ', error)
       }
-    }, 1250)
+    }, 2000)
   }, [])
 
   const saveItem = (newItems) => {
