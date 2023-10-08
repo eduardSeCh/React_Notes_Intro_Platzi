@@ -9,7 +9,7 @@ function TodoProvider ({ children }) {
   } = useLocalStorage('TODOS_V1', [])
 
   const [searchValue, setSearchValue] = useState('')
-  const [openModal, setOpenModal] = useState(true)
+  const [openModal, setOpenModal] = useState(false)
 
   const completedTodos = todos.filter(todo => !!todo.completed).length
   const totalTodos = todos.length
@@ -20,6 +20,15 @@ function TodoProvider ({ children }) {
       return todoText.includes(searchText)
     }
   )
+
+  const addTodo = (text) => {
+    const newTodos = [...todos]
+    newTodos.push({
+      text,
+      completed: false
+    })
+    saveTodos(newTodos)
+  }
 
   const completeTodo = (text) => {
     const newTodos = [...todos]
@@ -49,6 +58,7 @@ function TodoProvider ({ children }) {
       searchedTodos,
       completeTodo,
       deleteTodo,
+      addTodo,
       openModal,
       setOpenModal
     }}
