@@ -22,3 +22,7 @@ input::placeholder {
 input:focus {
     outline-color: #61dafa;
 }
+
+input:disabled {
+    opacity: 25%;
+}

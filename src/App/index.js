@@ -29,31 +29,37 @@ function App () {
   } = useTodos()
   return (
     <>
-      <TodoHeader>
-        <TodoCounter totalTodos={totalTodos} completedTodos={completedTodos} />
-        <TodoSearch searchValue={searchValue} setSearchValue={setSearchValue} />
+      <TodoHeader loading={loading}>
+        <TodoCounter
+          totalTodos={totalTodos}
+          completedTodos={completedTodos}
+        />
+        <TodoSearch
+          searchValue={searchValue}
+          setSearchValue={setSearchValue}
+        />
       </TodoHeader>
-      <TodoList>
-        {loading &&
-          <>
-            <TodosLoading />
-            <TodosLoading />
-            <TodosLoading />
-          </>}
-        {error && <TodosError />}
-        {!loading && searchedTodos.length === 0 &&
-          <TodosEmpty />}
 
-        {searchedTodos.map(
-          todo => <TodoItem
+      <TodoList
+        error={error}
+        loading={loading}
+        searchedTodos={searchedTodos}
+        totalTodos={totalTodos}
+        searchText={searchValue}
+        onError={() => <TodosError />}
+        onLoading={() => <TodosLoading />}
+        onEmpty={() => <TodosEmpty />}
+        onEmptySearchResults={(searchtext) => <p>No hay resultados para {searchtext}</p>}
+        render={todo => (
+          <TodoItem
             key={todo.text}
             text={todo.text}
             completed={todo.completed}
             onComplete={() => completeTodo(todo.text)}
             onDelete={() => deleteTodo(todo.text)}
-                  />
+          />
         )}
-      </TodoList>
+      />
       <CreateTodoButton
         openModal={openModal}
         setOpenModal={setOpenModal}

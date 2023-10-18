@@ -1,10 +1,19 @@
 import '../css/TodoList.css'
 
-function TodoList ({ children }) {
+function TodoList ({
+  error, loading, searchedTodos, totalTodos, searchText,
+  onError, onLoading, onEmpty, onEmptySearchResults, render
+}) {
   return (
-    <ul className='TodoList'>
-      {children}
-    </ul>
+    <section>
+      {error && onError()}
+      {loading && onLoading()}
+      {(!loading && !totalTodos) && onEmpty()}
+      {(!!totalTodos && !searchedTodos.length) && onEmptySearchResults(searchText)}
+
+      {searchedTodos.map(render)}
+      <ul className='TodoList' />
+    </section>
   )
 }
 
