@@ -11,6 +11,7 @@ import { TodosEmpty } from '../components/TodosEmpty'
 import { TodoForm } from '../components/TodoForm'
 import { TodoHeader } from '../components/TodoHeader'
 import { Modal } from '../Modal'
+import { ChangueAlertWithStorageListener } from '../components/ChangeAlert'
 
 function App () {
   const {
@@ -72,6 +73,7 @@ function App () {
             setOpenModal={setOpenModal}
           />
         </Modal>}
+      <ChangueAlertWithStorageListener />
     </>
 
   )
