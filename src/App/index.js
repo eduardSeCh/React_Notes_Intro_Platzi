@@ -26,7 +26,8 @@ function App () {
     completedTodos,
     searchValue,
     setSearchValue,
-    addTodo
+    addTodo,
+    sincronizedTodos
   } = useTodos()
   return (
     <>
@@ -73,7 +74,9 @@ function App () {
             setOpenModal={setOpenModal}
           />
         </Modal>}
-      <ChangueAlertWithStorageListener />
+      <ChangueAlertWithStorageListener
+        sincronize={sincronizedTodos}
+      />
     </>
 
   )
