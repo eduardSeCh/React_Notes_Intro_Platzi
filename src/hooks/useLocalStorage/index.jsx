@@ -15,13 +15,13 @@ function useLocalStorage (itemName, initialValue) {
   const [error, setError] = useState(false)
   const [sincronized, setsincronized] = useState(true)
 
-  useEffect(() => {
+  useEffect(() => { // Tomar items
     setTimeout(() => {
       try {
         const localStorageItem = window.localStorage.getItem(itemName)
         let parsedItems
 
-        if (!localStorageItem) {
+        if (!localStorageItem) { // No hay
           window.localStorage.setItem(itemName, JSON.stringify(initialValue))
           parsedItems = initialValue
           setItems(parsedItems)
@@ -46,7 +46,7 @@ function useLocalStorage (itemName, initialValue) {
   }
 
   const sincronizeItems = () => {
-    setLoading(!loading)
+    setLoading(!loading) // Cargar el loading
     setsincronized(!sincronized)
   }
 
